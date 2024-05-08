@@ -17,6 +17,31 @@
           </div>
         </div>
         <div class="card-body">
+
+          {{-- Filter Code --}}
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                  <form action="{{ route('posts.index') }}" method="GET">
+                      <div class="row">
+                          <div class="col-md-4">
+                              <label for="start_date" class=" form-label">Start Date:</label>
+                              <input type="date" class="form-control" id="start_date" name="start_date" value="{{ $startDate ?? '' }}">
+                          </div>
+                          <div class="col-md-4">
+                              <label for="end_date" class="form-label">End Date:</label>
+                              <input type="date" class="form-control" id="end_date" name="end_date" value="{{ $endDate ?? '' }}">
+                          </div>
+                          <div class="col-md-4 mt-4">
+                              <label class="form-label">&nbsp;</label>
+                              <button type="submit" class="btn btn-primary">Filter</button>
+                              <a href="{{ route('posts.index') }}" class="btn btn-secondary">Clear</a>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+
+          
           {{-- Modal for Delete --}}
           <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -117,7 +142,8 @@
 
 <script src="{{asset ('assets/js/main.js') }}"></script>
 
-  <!-- Page JS -->
+
+<!-- Page JS -->
 
   <script src="{{ asset('assets/js/form-basic-inputs.js') }}"></script>
 {{-- delete popup --}}

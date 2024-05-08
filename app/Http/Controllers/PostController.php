@@ -8,16 +8,31 @@ use Illuminate\Support\Facades\File;
 use App\Models\Post;
 use Auth;
 
+use Carbon\Carbon;
+
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::where('user_id', Auth::id())
-                 ->orderBy('created_at', 'desc')
-                 ->paginate(10);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+
+        $query = Post::where('user_id', Auth::id());
+
+        if ($startDate) {
+            $startDate = Carbon::parse($startDate)->startOfDay();
+            $query->whereDate('created_at', '>=', $startDate);
+        }
+
+        if ($endDate) {
+            $endDate = Carbon::parse($endDate)->endOfDay();
+            $query->whereDate('created_at', '<=', $endDate);
+        }
+
+        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.blog.index', compact('posts'));
     }
