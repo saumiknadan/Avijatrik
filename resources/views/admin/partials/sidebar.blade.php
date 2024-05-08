@@ -42,6 +42,25 @@
 
     <ul class="menu-inner py-1">
       
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+              <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+              <div data-i18n="Blog">Blog</div>
+            </a>
+
+            <ul class="menu-sub">
+              <li class="menu-item">
+                <a href="{{ route('posts.index') }}" class="menu-link">
+                  <div data-i18n="View">View</div>
+                </a>
+              </li>
+              <li class="menu-item">
+                <a href="{{ route('posts.create') }}" class="menu-link">
+                  <div data-i18n="Create">Create</div>
+                </a>
+              </li>
+            </ul>
+          </li>
 
       <!-- Apps & Pages -->
       <li class="menu-header small text-uppercase">
