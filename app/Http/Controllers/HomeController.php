@@ -4,18 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Carbon\Carbon;
+use App\Models\User;
 
 class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::orderBy('created_at', 'desc')
-                 ->paginate(10);
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $userId = $request->input('user_id');
 
-        return view('admin.all.index', compact('posts'));
+        $query = Post::query();
+        if ($startDate) {
+            $startDate = Carbon::parse($startDate)->startOfDay();
+            $query->whereDate('created_at', '>=', $startDate);
+        }
+    
+
+        if ($endDate) {
+            $endDate = Carbon::parse($endDate)->endOfDay();
+            $query->whereDate('created_at', '<=', $endDate);
+        }
+    
+        if ($userId) {
+            $query->where('user_id', $userId);
+        }
+    
+        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+    
+        $users = User::all();
+
+        return view('admin.all.index', compact('posts', 'startDate', 'endDate', 'users', 'userId'));
+
     }
 
     /**

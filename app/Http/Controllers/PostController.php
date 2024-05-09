@@ -35,6 +35,8 @@ class PostController extends Controller
         $posts = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.blog.index', compact('posts'));
+
+        
     }
 
     /**
@@ -125,6 +127,21 @@ class PostController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function change_status(Post $post)
+    {
+        if($post->status==1)
+        {
+            $post->update(['status'=>0]);
+        }
+        else
+        {
+            $post->update(['status'=>1]);
+        }
+
+        session()->flash('success', 'Status changed successfully');
+        return redirect()->back();
     }
 
     /**

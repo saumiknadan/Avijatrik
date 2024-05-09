@@ -3,7 +3,18 @@
 @section('title') Category @endsection
 
 @section('styles')
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/jquery-timepicker/jquery-timepicker.css')}}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/pickr/pickr-themes.css')}}" />
 
+
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<script src="{{ asset('assets/vendor/js/helpers.js')}}"></script>
 @endsection
 
 @section('admin-content')
@@ -23,13 +34,15 @@
               <div class="col-md-12 mb-3">
                   <form action="{{ route('posts.index') }}" method="GET">
                       <div class="row">
-                          <div class="col-md-4">
-                              <label for="start_date" class=" form-label">Start Date:</label>
-                              <input type="date" class="form-control" id="start_date" name="start_date" value="{{ $startDate ?? '' }}">
+                          <div class="col-md-3">
+                            <label for="start_date" class="form-label">Start Date:</label>
+                            <input type="text" class="form-control start_date" id="start_date" name="start_date" value="{{ request()->input('start_date') ?? $startDate ?? '' }}">
                           </div>
-                          <div class="col-md-4">
-                              <label for="end_date" class="form-label">End Date:</label>
-                              <input type="date" class="form-control" id="end_date" name="end_date" value="{{ $endDate ?? '' }}">
+  
+                          <!-- End Date Input -->
+                          <div class="col-md-3">
+                            <label for="end_date" class="form-label">End Date:</label>
+                            <input type="text" class="form-control end_date" id="end_date" name="end_date" value="{{ request()->input('end_date') ?? $endDate ?? '' }}">
                           </div>
                           <div class="col-md-4 mt-4">
                               <label class="form-label">&nbsp;</label>
@@ -40,7 +53,6 @@
                   </form>
               </div>
           </div>
-
           
           {{-- Modal for Delete --}}
           <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-hidden="true">
@@ -141,11 +153,33 @@
 @section('scripts')
 
 <script src="{{asset ('assets/js/main.js') }}"></script>
+<script src="{{ asset('assets/js/forms-file-upload.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
 
 
 <!-- Page JS -->
+<script src="{{ asset('assets/js/forms-pickers.js')}}"></script>
+<script src="{{ asset('assets/js/forms-selects.js')}}"></script>
+<script src="{{ asset('assets/js/form-basic-inputs.js') }}"></script>
+  
+{{-- Date --}}
 
-  <script src="{{ asset('assets/js/form-basic-inputs.js') }}"></script>
+<script>
+    const datepick = document.querySelector('.start_date');
+        flatpickr(datepick, {
+            dateFormat: "d-m-Y"
+        });
+</script>
+
+<script>
+  const datepick1 = document.querySelector('.end_date');
+      flatpickr(datepick1, {
+          dateFormat: "d-m-Y"
+      });
+</script>
 {{-- delete popup --}}
 <script>
   document.addEventListener('DOMContentLoaded', function() {
