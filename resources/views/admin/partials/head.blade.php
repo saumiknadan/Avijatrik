@@ -14,13 +14,7 @@
     </title>
 
     <meta name="description" content="" />
-            {{-- @if(isset($companyInfo->logo) && $companyInfo->logo != null)
-                @if($companyInfo->logo_path == "admin")
-                    <link rel="icon" type="image/x-icon" href="{{ !empty($companyInfo->logo) ? asset(env('ADMINPATH').$companyInfo->logo) : '' }}" />
-                @else
-                    <link rel="icon" type="image/x-icon" href="{{ !empty($companyInfo->logo) ? asset(env('FRONTPATH').$companyInfo->logo) : '' }}" />
-                @endif
-            @endif --}}
+            
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
