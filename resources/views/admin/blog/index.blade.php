@@ -29,7 +29,7 @@
         </div>
         <div class="card-body">
 
-          {{-- Filter Code --}}
+          {{-- Filter --}}
             <div class="row">
               <div class="col-md-12 mb-3">
                   <form action="{{ route('posts.index') }}" method="GET">
@@ -79,17 +79,24 @@
                 <thead>
                     <tr>
                         <th width="15%" class="text-center">Sl</th>
-                        <th width="15%" class="text-center">Title</th>
-                        <th width="30%" class="text-center">Content</th>
-                        <th width="35%" class="text-center">Status</th>
+                        <th width="20%" class="text-center">Title</th>
+                        <th width="10%" class="text-center">Image</th>
+                        <th width="20%" class="text-center">Content</th>
+                        <th width="15%" class="text-center">Status</th>
                         <th width="15%" class="text-center">Action</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
                     @foreach ($posts as $index => $post)
                     <tr>
-                        <td class="text-center">{{ $index+1 }}</td>
+                        <td>{{ ($posts->currentPage() - 1) * $posts->perPage() + $loop->iteration }}</td>
+                        {{-- <td class="text-center">{{ $index+1 }}</td> --}}
                         <td class="text-center">{{ $post->title }}</td>
+                        <td class="text-center">
+                            @if(isset($post->image) && $post->image != null)
+                                <img width="42px" height="42px" alt class=" rounded-circle" src="{{asset('/storage/'.$post->image)}}">
+                            @endif
+                        </td>
                         <td class="text-justify">
                           @php
                               $content = $post->content;
@@ -144,6 +151,10 @@
                 </tbody>
             </table>
             
+            {{-- Pagination --}}
+            <div class="row mt-4">
+                <span class="mt-2">{{ $posts->links('vendor.pagination.bootstrap-5') }}</span>
+            </div>
         
       </div>
     </div>

@@ -7,21 +7,7 @@
 @endsection
 
 @section('admin-content')
-  {{-- <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
-          <h5 class="card-title mb-sm-0 me-2">All Content</h5>
-          <div class="action-btns">
-            <a class="btn btn-primary" href="{{ route('posts.create') }}">Create New Post</a>
-          </div>
-        </div>
-        <div class="card-body">
-
-        
-      </div>
-    </div>
-  </div> --}}
+  
   <div class="container">
     <div class="misc-wrapper">
       <h2 class="mb-1 mx-2">{{ $post->title }}</h2>
