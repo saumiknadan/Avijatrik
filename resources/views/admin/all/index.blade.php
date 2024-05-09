@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('title') Category @endsection
+@section('title') All Posts @endsection
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves.css')}}" />
@@ -70,7 +70,7 @@
                     <tr>
                         <th width="15%" class="text-center">Sl</th>
                         <th width="15%" class="text-center">Title</th>
-                        <th width="5%" class="text-center">Content</th>
+                        <th width="30%" class="text-center">Content</th>
                         <th width="35%" class="text-center">Status</th>
                         <th width="15%" class="text-center">Action</th>
                     </tr>

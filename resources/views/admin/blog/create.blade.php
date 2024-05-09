@@ -37,7 +37,7 @@ Create
                                         <input class="form-control" type="file" id="formFile" name="image" />                                                     
                                     </div>
 
-                                    {{-- Description --}}
+                                    {{-- Content --}}
                                     <div class="mt-3">
                                         <label for="description" class="form-label">Post</label>
                                         <textarea

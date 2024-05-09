@@ -21,7 +21,6 @@
                     <link rel="icon" type="image/x-icon" href="{{ !empty($companyInfo->logo) ? asset(env('FRONTPATH').$companyInfo->logo) : '' }}" />
                 @endif
             @endif --}}
-            <h6>Logo</h6>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

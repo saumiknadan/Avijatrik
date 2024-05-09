@@ -17,26 +17,30 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
+        try{
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
 
-        $query = Post::where('user_id', Auth::id());
+            $query = Post::where('user_id', Auth::id());
 
-        if ($startDate) {
-            $startDate = Carbon::parse($startDate)->startOfDay();
-            $query->whereDate('created_at', '>=', $startDate);
+            if ($startDate) {
+                $startDate = Carbon::parse($startDate)->startOfDay();
+                $query->whereDate('created_at', '>=', $startDate);
+            }
+
+            if ($endDate) {
+                $endDate = Carbon::parse($endDate)->endOfDay();
+                $query->whereDate('created_at', '<=', $endDate);
+            }
+
+            $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+
+            return view('admin.blog.index', compact('posts'));
+            
+        }catch (\Exception $e){
+            session()->flash('error','Something went wrong');
+            return redirect()->back();
         }
-
-        if ($endDate) {
-            $endDate = Carbon::parse($endDate)->endOfDay();
-            $query->whereDate('created_at', '<=', $endDate);
-        }
-
-        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
-
-        return view('admin.blog.index', compact('posts'));
-
-        
     }
 
     /**
@@ -44,7 +48,12 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.blog.create');
+        try{
+            return view('admin.blog.create');
+        }catch (\Exception $e){
+            session()->flash('error','Something went wrong');
+            return redirect()->back();
+        }
         
     }
 
@@ -59,21 +68,28 @@ class PostController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
 
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = Auth::id(); 
+        try{
+            $post = new Post();
+            $post->title = $request->title;
+            $post->content = $request->content;
+            $post->user_id = Auth::id(); 
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
 
-            $filename = time() . '_' . $image->getClientOriginalName();
-            $post->image = $image->storeAs('post', $filename);
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $post->image = $image->storeAs('post', $filename);
+            }
+
+            $post->save();
+            
+            session()->flash('success', 'Content created successfully');
+            return redirect()->back();
+
+        }catch (\Exception $e){
+            session()->flash('error','Something went wrong');
+            return redirect()->back();
         }
-
-        $post->save();
-
-        return redirect()->back();
     }
 
     /**
@@ -81,8 +97,13 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post = Post::findOrFail($id);
-        return view('admin.blog.show', compact('post'));
+        try{
+            $post = Post::findOrFail($id);
+            return view('admin.blog.show', compact('post'));
+        }catch (\Exception $e){
+            session()->flash('error','Something went wrong');
+            return redirect()->back();
+        }
 
     }
 
@@ -91,7 +112,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.blog.edit', compact('post'));
+        try{
+            return view('admin.blog.edit', compact('post'));
+        }catch (\Exception $e){
+            session()->flash('error','Something went wrong');
+            return redirect()->back();
+        }
         
     }
 
@@ -105,27 +131,32 @@ class PostController extends Controller
             'content' => 'required|string',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Validating image file (optional)
         ]);
+        try{
+            $post = Post::findOrFail($id);
+            $post->title = $request->title;
+            $post->content = $request->content;
+            $post->user_id = Auth::id(); 
 
-        $post = Post::findOrFail($id);
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = Auth::id(); 
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            
-            $filename = time() . '_' . $image->getClientOriginalName();
-            $destination = public_path('storage/' . $post->image);
-            if(File::exists($destination)) {
-                File::delete($destination);
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                
+                $filename = time() . '_' . $image->getClientOriginalName();
+                $destination = public_path('storage/' . $post->image);
+                if(File::exists($destination)) {
+                    File::delete($destination);
+                }
+        
+                $post->image = $image->storeAs('post', $filename);
             }
-    
-            $post->image = $image->storeAs('post', $filename);
+
+            $post->save();
+
+            session()->flash('success', 'Content Updated successfully');
+            return redirect()->back();
+        }catch (\Exception $e){
+            session()->flash('error','Something went wrong');
+            return redirect()->back();
         }
-
-        $post->save();
-
-        return redirect()->back();
 
     }
 

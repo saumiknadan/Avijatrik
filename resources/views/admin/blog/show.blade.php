@@ -1,6 +1,6 @@
 @extends('admin.index')
 
-@section('title') Category @endsection
+@section('title') {{ $post->title }} @endsection
 
 @section('styles')
 
@@ -25,7 +25,7 @@
   <div class="container">
     <div class="misc-wrapper">
       <h2 class="mb-1 mx-2">{{ $post->title }}</h2>
-      <a href="{{ route('posts.index') }}" class="btn btn-primary mb-4">Back to All Blog</a>
+      <a href="{{ route('posts.index') }}" class="btn btn-primary mb-4">Back to All Posts</a>
       <div class="mt-4 text-center">
         @if(isset($post->image) && $post->image != null)
             <img

@@ -14,32 +14,36 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $startDate = $request->input('start_date');
-        $endDate = $request->input('end_date');
-        $userId = $request->input('user_id');
+        try{
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+            $userId = $request->input('user_id');
 
-        $query = Post::query();
-        if ($startDate) {
-            $startDate = Carbon::parse($startDate)->startOfDay();
-            $query->whereDate('created_at', '>=', $startDate);
+            $query = Post::query();
+            if ($startDate) {
+                $startDate = Carbon::parse($startDate)->startOfDay();
+                $query->whereDate('created_at', '>=', $startDate);
+            }
+        
+
+            if ($endDate) {
+                $endDate = Carbon::parse($endDate)->endOfDay();
+                $query->whereDate('created_at', '<=', $endDate);
+            }
+        
+            if ($userId) {
+                $query->where('user_id', $userId);
+            }
+        
+            $posts = $query->orderBy('created_at', 'desc')->paginate(10);
+        
+            $users = User::all();
+
+            return view('admin.all.index', compact('posts', 'startDate', 'endDate', 'users', 'userId'));
+        }catch (\Exception $e){
+            session()->flash('error','Something went wrong');
+            return redirect()->back();
         }
-    
-
-        if ($endDate) {
-            $endDate = Carbon::parse($endDate)->endOfDay();
-            $query->whereDate('created_at', '<=', $endDate);
-        }
-    
-        if ($userId) {
-            $query->where('user_id', $userId);
-        }
-    
-        $posts = $query->orderBy('created_at', 'desc')->paginate(10);
-    
-        $users = User::all();
-
-        return view('admin.all.index', compact('posts', 'startDate', 'endDate', 'users', 'userId'));
-
     }
 
     /**
