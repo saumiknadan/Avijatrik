@@ -76,4 +76,9 @@
 .app-brand-text {
     margin-top: 0.625rem !important;
 }
+
+.avatar img {
+    width: 100%;
+    height: 100%  !important;
+}
     </style>

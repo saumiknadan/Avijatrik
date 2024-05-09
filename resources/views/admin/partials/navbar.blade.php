@@ -177,13 +177,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      {{-- @if(isset($companyInfo->logo) && $companyInfo->logo != null)
-                          @if($companyInfo->logo_path == "admin")
-                              <img width="42px" height="32px" alt class="h-auto rounded-circle" src="{{ !empty($companyInfo->logo)?asset(env('ADMINPATH').$companyInfo->logo):'' }}">
-                          @else
-                              <img width="42px" height="32px" alt class="h-auto rounded-circle" src="{{ !empty($companyInfo->logo)?asset(env('FRONTPATH').$companyInfo->logo):'' }}">
-                          @endif
-                      @endif --}}
+                      <img width="20%" height="20%" alt class="h-auto rounded-circle" src="{{asset('/storage/'.Auth::user()->image)}}">
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -192,15 +186,11 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              {{-- @if(isset($companyInfo->logo) && $companyInfo->logo != null)
-                                  @if($companyInfo->logo_path == "admin")
-                                      <img width="42px" height="32px" alt class="h-auto rounded-circle" src="{{ !empty($companyInfo->logo)?asset(env('ADMINPATH').$companyInfo->logo):'' }}">
-                                  @else
-                                      <img width="42px" height="32px" alt class="h-auto rounded-circle" src="{{ !empty($companyInfo->logo)?asset(env('FRONTPATH').$companyInfo->logo):'' }}">
-                                  @endif
-                              @endif --}}
+                              <img width="20%" height="20%" alt class="h-auto rounded-circle" src="{{asset('/storage/'.Auth::user()->image)}}">
                             </div>
                           </div>
+                          
+
                           <div class="flex-grow-1">
                             <span class="fw-medium d-block">{{ Auth::user()->name }}</span>
                             <small class="text-muted">Admin</small>
