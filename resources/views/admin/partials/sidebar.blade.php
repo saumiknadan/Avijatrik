@@ -29,7 +29,7 @@
                 fill="#7367F0" />
             </svg>
           </span>
-          <span class="app-brand-text demo menu-text fw-bold">Home</span>
+          <span class="app-brand-text demo menu-text fw-bold">Avijatrik</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -40,38 +40,36 @@
 
     <div class="menu-inner-shadow"></div>
 
+    
+
     <ul class="menu-inner py-1">
-      
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-              <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-              <div data-i18n="Blog">Blog</div>
-            </a>
 
-            <ul class="menu-sub">
-              <li class="menu-item">
-                <a href="{{ route('posts.index') }}" class="menu-link">
-                  <div data-i18n="View">View</div>
-                </a>
-              </li>
-              <li class="menu-item">
-                <a href="{{ route('posts.create') }}" class="menu-link">
-                  <div data-i18n="Create">Create</div>
-                </a>
-              </li>
-            </ul>
-          </li>
-
-      <!-- Apps & Pages -->
-      <li class="menu-header small text-uppercase">
-        <span class="menu-header-text" data-i18n="Cache Clear">Cache &amp; Clear</span>
-      </li>
       <li class="menu-item">
-        <a href="{{ route('admin-cache-clear') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-mail"></i>
-          <div data-i18n="Cache">Cache</div>
+        <a href="{{ route('dashboard') }}" class="menu-link">
+          <i class="menu-icon tf-icons ti ti-home"></i>
+          <div data-i18n="Home">Home</div>
         </a>
       </li>
       
+      <li class="menu-item">
+        <a href="javascript:void(0);" class="menu-link menu-toggle">
+          <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+          <div data-i18n="Blog">Blog</div>
+        </a>
+
+        <ul class="menu-sub">
+          <li class="menu-item">
+            <a href="{{ route('posts.index') }}" class="menu-link">
+              <div data-i18n="View">View</div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="{{ route('posts.create') }}" class="menu-link">
+              <div data-i18n="Create">Create</div>
+            </a>
+          </li>
+        </ul>
+      </li>
+
     </ul>
   </aside>

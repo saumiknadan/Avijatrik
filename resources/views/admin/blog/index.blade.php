@@ -22,7 +22,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
-          <h5 class="card-title mb-sm-0 me-2">All Content</h5>
+          <h5 class="card-title mb-sm-0 me-2">My Content</h5>
           <div class="action-btns">
             <a class="btn btn-primary" href="{{ route('posts.create') }}">Create New Post</a>
           </div>
@@ -78,10 +78,10 @@
               <table class="table table-striped table-product" style="width:100%">
                 <thead>
                     <tr>
-                        <th width="15%" class="text-center">Sl</th>
-                        <th width="20%" class="text-center">Title</th>
-                        <th width="10%" class="text-center">Image</th>
-                        <th width="20%" class="text-center">Content</th>
+                        <th width="5%" class="text-center">Sl</th>
+                        <th width="25%" class="text-center">Title</th>
+                        <th width="15%" class="text-center">Image</th>
+                        <th width="25%" class="text-center">Content</th>
                         <th width="15%" class="text-center">Status</th>
                         <th width="15%" class="text-center">Action</th>
                     </tr>
@@ -89,8 +89,7 @@
                 <tbody class="table-border-bottom-0">
                     @foreach ($posts as $index => $post)
                     <tr>
-                        <td>{{ ($posts->currentPage() - 1) * $posts->perPage() + $loop->iteration }}</td>
-                        {{-- <td class="text-center">{{ $index+1 }}</td> --}}
+                        <td class="text-center">{{ ($posts->currentPage() - 1) * $posts->perPage() + $loop->iteration }}</td>
                         <td class="text-center">{{ $post->title }}</td>
                         <td class="text-center">
                             @if(isset($post->image) && $post->image != null)

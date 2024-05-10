@@ -9,7 +9,7 @@ Create
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row mb-5">
-                        <h5 class="card-title mb-sm-0 me-2">Create New Blog</h5>
+                        <h5 class="card-title mb-sm-0 me-2">Create New Post</h5>
                         <div class="action-btns">
                             <a class="btn btn-label-primary me-3" href="{{ route('posts.index') }}">
                             <span class="align-middle"> Back</span>

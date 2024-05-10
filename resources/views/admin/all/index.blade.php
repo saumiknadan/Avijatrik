@@ -68,9 +68,9 @@
               <table class="table table-striped table-product" style="width:100%">
                 <thead>
                     <tr>
-                        <th width="15%" class="text-center">Sl</th>
-                        <th width="20%" class="text-center">Title</th>
-                        <th width="10%" class="text-center">Image</th>
+                        <th width="5%" class="text-center">Sl</th>
+                        <th width="25%" class="text-center">Title</th>
+                        <th width="15%" class="text-center">Image</th>
                         <th width="20%" class="text-center">Content</th>
                         <th width="15%" class="text-center">Status</th>
                         <th width="15%" class="text-center">Action</th>
@@ -79,7 +79,7 @@
                 <tbody class="table-border-bottom-0">
                     @foreach ($posts as $post)
                     <tr>
-                        <td>{{ ($posts->currentPage() - 1) * $posts->perPage() + $loop->iteration }}</td>
+                        <td class="text-center">{{ ($posts->currentPage() - 1) * $posts->perPage() + $loop->iteration }}</td>
                         <td class="text-center">{{ $post->title }}</td>
                         <td class="text-center">
                             @if(isset($post->image) && $post->image != null)

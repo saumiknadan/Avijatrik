@@ -4,13 +4,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-// Route::get('/', function () {
-//     return view('admin.index');
-// })->middleware(['auth', 'verified'])->name('dashboard_index');
-
-// Route::get('/home', function () {
-//     return view('admin.index');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 use App\Http\Controllers\HomeController;
 
@@ -24,9 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::get('/create', function () {
-//     return view('admin.blog.create');
-// });
 
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);
@@ -34,12 +24,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 });
 
-Route::get('/cache/clear', function() {
-    Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
-    return redirect()->back()->with('success','System Cache Has Been Removed.');
-  })->name('admin-cache-clear');
 
 require __DIR__.'/auth.php';

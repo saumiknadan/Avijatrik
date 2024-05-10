@@ -43,7 +43,6 @@
     <link rel="stylesheet" href="{{asset('/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/vendor/libs/toastr/toastr.css')}}" />
-    {{-- <link rel="stylesheet" href="{{asset('assets/vendor/libs/toastr/toastr.js')}}" /> --}}
     <!-- Page CSS -->
     <link rel="stylesheet" href="{{asset('/assets/vendor/css/pages/cards-advance.css')}}" />
 
